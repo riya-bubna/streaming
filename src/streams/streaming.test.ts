@@ -1,8 +1,9 @@
 import EventInterface from './event.interface';
 import StreamingService from './streaming.service';
+import assert from 'assert';
 
 describe('StreamingService', () => {
-  const streamingService = new StreamingService();
+  const streamingService = StreamingService.getInstance();
   const primaryResourceId = 6;
   it('send first packet for resource', async () => {
     const event: EventInterface = {
@@ -56,5 +57,11 @@ describe('StreamingService', () => {
       };
       streamingService.processStream(event);
     }, 120 * 1000);
+  });
+
+  it('test ancillary function', async () => {
+    const words = 'This is a list of words';
+    const output = await streamingService.ancillaryServiceFunction(words);
+    assert.notStrictEqual(output, [4, 2, 1, 4, 2, 5]);
   });
 });
