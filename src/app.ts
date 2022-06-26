@@ -15,7 +15,6 @@ class App {
 
   constructor(controllers: readonly Controller[]) {
     this.app = express();
-
     this.initializeStandardMiddlewares();
     this.initializeControllers(controllers);
   }

@@ -9,7 +9,7 @@ import { PROCESS_STREAM_API } from '../path';
 class StreamingController implements Controller {
   public path = PROCESS_STREAM_API;
   public router = express.Router();
-  public streamingService = new StreamingService();
+  public streamingService = StreamingService.getInstance();
 
   constructor() {
     this.initializeRoutes();

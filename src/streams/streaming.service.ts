@@ -3,6 +3,21 @@ import { Mutex } from '../utils/mutex';
 import EventInterface from './event.interface';
 
 class StreamingService {
+  private static _instance: StreamingService = new StreamingService();
+
+  constructor() {
+    if (StreamingService._instance) {
+      throw new Error(
+        'Error: Instantiation failed: Use StreamingService.getInstance() instead of new.'
+      );
+    }
+    StreamingService._instance = this;
+  }
+
+  public static getInstance(): StreamingService {
+    return StreamingService._instance;
+  }
+
   private static streamBuffer = new Map<number, Map<number, Array<number>>>();
   private static bufferMutex = new Map<number, Mutex>();
 
